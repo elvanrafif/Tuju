@@ -1,4 +1,5 @@
 import type { DateFormData } from "../../utils/types";
+import StepHeader from "../ui/StepHeader";
 import SelectionCard from "../ui/SelectionCard";
 import Button from "../ui/Button";
 
@@ -21,10 +22,10 @@ export default function StepVibe({ data, update, onNext, onBack }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-1">
-        <h2 className="text-2xl font-serif font-bold text-navy-900">Tentukan Vibe.</h2>
-        <p className="text-navy-700 text-sm">Pilih satu pengalaman utama.</p>
-      </div>
+      <StepHeader 
+        title="Tentukan Vibe." 
+        subtitle="Pilih satu pengalaman utama." 
+      />
 
       <div className="grid grid-cols-2 gap-3">
         {CATEGORIES.map((cat) => (

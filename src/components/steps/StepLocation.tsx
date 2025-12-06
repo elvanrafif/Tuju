@@ -1,7 +1,9 @@
 import { useState } from "react";
 import type { DateFormData } from "../../utils/types";
 import { INDONESIA_CITIES } from "../../data/location";
-import { MapPin } from "lucide-react";
+import StepHeader from "../ui/StepHeader";
+import SectionLabel from "../ui/SectionLabel";
+import Input from "../ui/Input";
 import Button from "../ui/Button";
 
 interface Props {
@@ -24,22 +26,20 @@ export default function StepLocation({ data, update, onNext }: Props) {
 
   return (
     <div className="space-y-8">
-      <div className="space-y-1">
-        <h2 className="text-2xl font-serif font-bold text-navy-900">Mulai dari mana?</h2>
-        <p className="text-navy-700 text-sm">Tentukan titik awal perjalananmu.</p>
-      </div>
+      <StepHeader 
+        title="Mulai dari mana?" 
+        subtitle="Tentukan titik awal perjalananmu." 
+      />
 
       <div className="space-y-6">
         <div className="relative group">
-          <input
-            type="text"
+          <Input
+            withIcon
             value={data.location}
             onChange={(e) => handleLocationChange(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             placeholder="Ketik kotamu..."
-            className="w-full bg-beige-100/50 border border-beige-500 text-navy-900 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 transition-all placeholder:text-navy-700/50"
           />
-          <MapPin className="absolute right-4 top-4 text-navy-700 w-5 h-5 group-focus-within:text-navy-900 transition-colors" />
           
           {showSuggestions && suggestions.length > 0 && (
             <ul className="absolute z-20 w-full bg-white border border-beige-500 rounded-xl shadow-xl mt-2 overflow-hidden py-1">
@@ -53,9 +53,7 @@ export default function StepLocation({ data, update, onNext }: Props) {
         </div>
 
         <div className="space-y-3">
-          <label className="text-xs font-bold tracking-widest text-navy-700/60 uppercase">
-            Pergi sama siapa?
-          </label>
+          <SectionLabel>Pergi sama siapa?</SectionLabel>
           <div className="flex bg-beige-100 p-1 rounded-xl">
             {['Pasangan', 'Teman', 'Keluarga'].map((p) => (
               <button
