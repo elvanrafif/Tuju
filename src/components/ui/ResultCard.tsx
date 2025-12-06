@@ -1,5 +1,5 @@
 import type { DateRecommendation } from "../../utils/types";
-import { MapPin, Star, Video, Send } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import { FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
