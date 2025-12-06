@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import MultiStepForm from "./components/MultiStepForm";
-import AnimatedHeader from "./components/ui/AnimatedHeader"; // Import Component Baru
+import AnimatedHeader from "./components/ui/AnimatedHeader";
 import { motion } from "framer-motion";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Timer 3 detik untuk animasi typing
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000); 
@@ -17,11 +16,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-beige-100 text-navy-900 font-sans selection:bg-beige-500 selection:text-navy-900 overflow-hidden">
-      
-      {/* 1. ANIMATED HEADER (Splash -> Header) */}
       <AnimatedHeader isLoading={isLoading} />
 
-      {/* 2. MAIN CONTENT (Muncul setelah loading selesai) */}
       {!isLoading && (
         <motion.main 
           initial={{ opacity: 0, y: 50 }}

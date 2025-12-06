@@ -18,12 +18,11 @@ export default function AnimatedHeader({ isLoading }: Props) {
       transition={{ duration: 0.8, ease: [0.6, 0.01, -0.05, 0.9] }} 
       className={`flex flex-col items-center justify-center text-center transition-colors duration-500
         ${isLoading 
-          ? "fixed inset-0 z-50 bg-beige-100" // Mode Splash Screen
-          : "relative z-10 pt-10 pb-6 bg-transparent" // Mode Header Biasa
+          ? "fixed inset-0 z-50 bg-beige-100"
+          : "relative z-10 pt-10 pb-6 bg-transparent"
         }
       `}
     >
-      {/* LOGO TEXT (Typing Effect -> Static) */}
       <motion.h1 
         layout="position" 
         className={`font-serif font-bold tracking-tight text-navy-900 leading-none
@@ -48,7 +47,6 @@ export default function AnimatedHeader({ isLoading }: Props) {
         )}
       </motion.h1>
 
-      {/* SLOGAN (Hanya muncul setelah jadi Header) */}
       <AnimatePresence>
         {!isLoading && (
           <motion.p 

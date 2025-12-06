@@ -1,5 +1,7 @@
 import type { DateFormData } from "../../utils/types";
 import { Sparkles, Flame, PenLine } from "lucide-react";
+import Button from "../ui/Button";
+import SelectionCard from "../ui/SelectionCard";
 
 interface Props {
   data: DateFormData;
@@ -18,31 +20,23 @@ export default function StepLogistics({ data, update, onSubmit, onBack, isLoadin
       </div>
 
       <div className="space-y-6">
-        {/* Budget: 3 Tier Layout */}
         <div>
           <label className="text-xs font-bold tracking-widest text-navy-700/60 uppercase mb-3 block">Kondisi Dompet</label>
-          <div className="grid grid-cols-3 gap-3"> {/* Ubah jadi grid-cols-3 */}
+          <div className="grid grid-cols-3 gap-3">
             {['Save 💸', 'Normal ⚖️', 'Splurge 💎'].map((b) => (
-              <button
+              <SelectionCard
                 key={b}
+                label={b}
+                isSelected={data.budgetTier === b}
                 onClick={() => update({ budgetTier: b as any })}
-                className={`py-4 px-2 rounded-xl border text-center transition-all ${
-                  data.budgetTier === b
-                    ? "border-navy-900 bg-navy-900 text-white shadow-lg shadow-navy-900/20 scale-105"
-                    : "border-beige-500/50 text-navy-700 hover:bg-beige-100"
-                }`}
-              >
-                <div className="font-bold text-xs sm:text-sm whitespace-nowrap">{b}</div>
-              </button>
+              />
             ))}
           </div>
         </div>
 
-        {/* Toggles */}
         <div className="space-y-3">
           <label className="text-xs font-bold tracking-widest text-navy-700/60 uppercase block">Preferensi Khusus</label>
           
-          {/* Hidden Gem */}
           <div 
             onClick={() => update({ isHiddenGem: !data.isHiddenGem })}
             className="flex items-center justify-between p-4 bg-white rounded-xl border border-beige-500/50 cursor-pointer hover:border-beige-500 transition-colors"
@@ -61,7 +55,6 @@ export default function StepLogistics({ data, update, onSubmit, onBack, isLoadin
             </div>
           </div>
 
-          {/* Viral Toggle */}
           <div 
             onClick={() => update({ isViral: !data.isViral })}
             className="flex items-center justify-between p-4 bg-white rounded-xl border border-beige-500/50 cursor-pointer hover:border-beige-500 transition-colors"
@@ -81,7 +74,6 @@ export default function StepLogistics({ data, update, onSubmit, onBack, isLoadin
           </div>
         </div>
 
-        {/* Note */}
         <div className="space-y-2 pt-2">
            <label className="flex items-center gap-2 text-xs font-bold tracking-widest text-navy-700/60 uppercase">
              <PenLine className="w-3 h-3" /> Catatan Tambahan (Opsional)
@@ -96,16 +88,12 @@ export default function StepLogistics({ data, update, onSubmit, onBack, isLoadin
       </div>
 
       <div className="pt-6 flex gap-3">
-        <button onClick={onBack} disabled={isLoading} className="px-6 py-3 rounded-xl text-navy-700 hover:text-navy-900 font-medium">
+        <Button variant="outline" onClick={onBack} disabled={isLoading} className="w-1/3">
           Kembali
-        </button>
-        <button
-          onClick={onSubmit}
-          disabled={isLoading}
-          className="flex-1 py-3 bg-navy-900 text-white rounded-xl font-medium hover:bg-navy-900/90 transition-all disabled:opacity-70 shadow-lg shadow-navy-900/20"
-        >
+        </Button>
+        <Button onClick={onSubmit} disabled={isLoading} className="flex-1 shadow-lg shadow-navy-900/20">
           {isLoading ? "Sedang Mengurasi..." : "Buatkan Rencana"}
-        </button>
+        </Button>
       </div>
     </div>
   );

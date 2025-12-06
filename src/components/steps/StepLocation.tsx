@@ -1,7 +1,8 @@
 import { useState } from "react";
-import type { DateFormData } from "../../utils/types"; // Import type
-import { INDONESIA_CITIES } from "../../data/location"; // REVISI: Path 'location' (singular)
+import type { DateFormData } from "../../utils/types";
+import { INDONESIA_CITIES } from "../../data/location";
 import { MapPin } from "lucide-react";
+import Button from "../ui/Button";
 
 interface Props {
   data: DateFormData;
@@ -29,7 +30,6 @@ export default function StepLocation({ data, update, onNext }: Props) {
       </div>
 
       <div className="space-y-6">
-        {/* Input Lokasi */}
         <div className="relative group">
           <input
             type="text"
@@ -52,7 +52,6 @@ export default function StepLocation({ data, update, onNext }: Props) {
           )}
         </div>
 
-        {/* Tabs Partner */}
         <div className="space-y-3">
           <label className="text-xs font-bold tracking-widest text-navy-700/60 uppercase">
             Pergi sama siapa?
@@ -75,13 +74,9 @@ export default function StepLocation({ data, update, onNext }: Props) {
         </div>
       </div>
 
-      <button
-        onClick={onNext}
-        disabled={data.location.length < 3}
-        className="w-full py-4 bg-navy-900 text-white rounded-xl font-medium hover:bg-navy-900/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-navy-900/20"
-      >
+      <Button onClick={onNext} disabled={data.location.length < 3}>
         Lanjut
-      </button>
+      </Button>
     </div>
   );
 }

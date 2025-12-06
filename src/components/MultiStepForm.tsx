@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { DateFormData, DateRecommendation } from "../utils/types";
 import { generateDateIdeas } from "../services/ai";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +12,6 @@ export default function MultiStepForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [recommendations, setRecommendations] = useState<DateRecommendation[]>([]);
   
-  // State ini TIDAK AKAN DI-RESET saat tombol 'Cari Ulang' diklik
   const [formData, setFormData] = useState<DateFormData>({
     location: "",
     partner: "Pasangan",
@@ -25,17 +24,16 @@ export default function MultiStepForm() {
     extraNote: ""
   });
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   const updateData = (partial: Partial<DateFormData>) => setFormData(p => ({ ...p, ...partial }));
   const nextStep = () => setStep(p => p + 1);
   const prevStep = () => setStep(p => p - 1);
 
-  // Fungsi untuk 'Cari Ulang' / Edit
   const handleEditSearch = () => {
-    // Kita hanya memindahkan user kembali ke Step 1
-    // Data formData DIBIARKAN UTUH (Persistent)
     setStep(1);
-    // Opsional: Jika ingin rekomendasi lama hilang, uncomment baris bawah:
-    // setRecommendations([]); 
   };
 
   const handleSubmit = async () => {
@@ -78,11 +76,7 @@ export default function MultiStepForm() {
         )}
         {step === 4 && (
           <motion.div key="4" variants={fadeVariant} initial="initial" animate="animate" exit="exit">
-            <StepResult 
-              results={recommendations} 
-              onReset={handleEditSearch} 
-              isLoading={isLoading}
-            />
+            <StepResult results={recommendations} onReset={handleEditSearch} isLoading={isLoading} />
           </motion.div>
         )}
       </AnimatePresence>

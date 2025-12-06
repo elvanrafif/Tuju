@@ -7,22 +7,19 @@ const genAI = new GoogleGenerativeAI(apiKey);
 export const generateDateIdeas = async (criteria: DateFormData): Promise<DateRecommendation[]> => {
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-001" });
 
-  // 1. Logic Budget (Updated: 3 Tier)
   let budgetInstruction = "";
   if (criteria.budgetTier === 'Save 💸') {
-    budgetInstruction = "Cari tempat yang ramah kantong, affordable, murah meriah tapi bagus, atau gratis. Hindari tempat mahal.";
+    budgetInstruction = "Cari tempat yang ramah kantong, affordable, murah meriah tapi bagus, atau gratis. Hindari tempat overpriced.";
   } else if (criteria.budgetTier === 'Normal ⚖️') {
-    budgetInstruction = "Cari tempat dengan harga standar/menengah (Mid-range). Tidak terlalu murah (street food), tapi jangan Fine Dining mahal. Value for money yang pas.";
+    budgetInstruction = "Cari tempat dengan harga standar/menengah (Mid-range). Tidak terlalu murah, tapi jangan Fine Dining mahal.";
   } else {
     budgetInstruction = "Cari tempat yang agak pricey, upscale, luxury, dining experience, atau worth to splurge.";
   }
 
-  // 2. Logic Hidden Gem
   const hiddenGemInstruction = criteria.isHiddenGem
     ? "WAJIB cari 'Hidden Gems': Tempat yang belum banyak orang tahu, masuk gang/tersembunyi, tapi kualitas bintang 5."
     : "Cari tempat yang populer, established, dan terjamin kualitasnya.";
 
-  // 3. Logic Context Kategori
   let categoryContext = criteria.category;
   if (criteria.category === "Makan Cantik") categoryContext = "Dining/Cafe/Bistro yang aesthetic, interior bagus. DILARANG warung tenda/kaki lima.";
   if (criteria.category === "Alam & Terbuka") categoryContext = "Nature spots, city parks, beaches, or semi-outdoor venues with fresh air.";
@@ -45,7 +42,7 @@ export const generateDateIdeas = async (criteria: DateFormData): Promise<DateRec
     QUALITY CONTROL (SYARAT MUTLAK):
     1. Rating Google Maps HARUS >= 4.0 Bintang.
     2. Jumlah ulasan HARUS > 50.
-    3. CEK STATUS BUKA/TUTUP: DILARANG KERAS merekomendasikan tempat yang sudah "Permanently Closed" (Tutup Permanen). Pastikan tempat masih beroperasi sampai hari ini.
+    3. CEK STATUS BUKA/TUTUP: DILARANG KERAS merekomendasikan tempat yang sudah "Permanently Closed". Pastikan tempat masih beroperasi.
     4. DILARANG KERAS: McDonald's, KFC, Burger King, Starbucks, Mixue, Solaria, Mie Gacoan.
 
     OUTPUT FORMAT (JSON Only):
