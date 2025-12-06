@@ -124,7 +124,7 @@ export default function StepResult({ results, onReset, isLoading }: Props) {
         ))}
       </div>
 
-      <Button variant="outline" onClick={onReset}>
+      <Button variant="outline" onClick={onReset} className="w-full">
         <Repeat className="w-4 h-4" /> Ubah Kriteria
       </Button>
     </motion.div>

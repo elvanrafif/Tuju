@@ -74,7 +74,7 @@ export default function StepLocation({ data, update, onNext }: Props) {
         </div>
       </div>
 
-      <Button onClick={onNext} disabled={data.location.length < 3}>
+      <Button onClick={onNext} disabled={data.location.length < 3} className="w-full">
         Lanjut
       </Button>
     </div>
