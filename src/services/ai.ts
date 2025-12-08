@@ -5,7 +5,7 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export const generateDateIdeas = async (criteria: DateFormData): Promise<DateRecommendation[]> => {
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-001" });
+  const model = genAI.getGenerativeModel({ model: "models/gemini-2.5-flash" });
 
   let budgetInstruction = "";
   if (criteria.budgetTier === 'Save 💸') {
